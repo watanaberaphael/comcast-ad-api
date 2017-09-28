@@ -32,13 +32,29 @@ Installation
 Run Application
 ---------------- 
    
-   This application is a Spring Boot Application. Then, to run it, you need to run the main class:
-    com.rnaka.comcast.ad.Application.java
+   This application is a Spring Boot Application. Then, to run it, follow these instructions:
+   
+   By IDE (IntelliJ or Eclipse):
+   - Build the project with maven command: mvn clean install
+   - Go to the class com.rnaka.comcast.ad.Application 
+   - There is a static void main, run it
+   
+   By Command Line:
+   - Go to the root project path
+   - Run mvn clean install
+   - mvn package && java -jar target/ad-api-1.0.0.jar
     
    The application runs on port 8080.
    
-   To test the services, use Postman with project file that is in the repository: 
-    /resources/Comcast - Ad API.postman_collection
+   
+   To test the services, there are two ways:
+   
+   Automatic integration tests
+   - Go to Integration Tests section
+   
+   Manual integration tests
+   - use Postman with project file that is in the repository: 
+   /resources/Comcast - Ad API.postman_collection
    
 Integration Tests
 ------------------
@@ -47,8 +63,8 @@ Integration Tests
 
     Test Classes:
     CreateAdCampaignViaPOSTTest     ->      To create Ad
-    FetchAdCampaignForPartnerTest   ->      To get Ad
-    PlusListAllAdTest               ->      To list Ad 
+    FetchAdCampaignForPartnerTest   ->      To get Ad by Partner
+    PlusListAllAdTest               ->      To list all Ads
     
 Unit Tests
 -----------

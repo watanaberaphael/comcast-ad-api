@@ -6,7 +6,7 @@
 
     <groupId>com.rnaka.comcast</groupId>
     <artifactId>ad-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <start-class>com.rnaka.comcast.ad.Application</start-class>

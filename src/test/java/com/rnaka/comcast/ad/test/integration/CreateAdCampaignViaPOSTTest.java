@@ -64,13 +64,14 @@ public class CreateAdCampaignViaPOSTTest {
     public void shouldInsert() throws Exception {
 
         Ad ad = MockUtils.getAdMock();
+        MessageDTO messageDTO = new MessageDTO(MessageEnum.V3000.getMessage(), MessageEnum.V3000.getId());
 
         HttpEntity<Ad> httpEntity = new HttpEntity<>(ad);
 
         ResponseEntity<String> response = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity, String.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(response.getBody().contains("Ad was created with success."));
+        assertEquals(jsonTester.write(messageDTO).getJson(), response.getBody());
     }
 
     /**
@@ -95,7 +96,7 @@ public class CreateAdCampaignViaPOSTTest {
         HttpEntity<Ad> httpEntity2 = new HttpEntity<>(ad);
         ResponseEntity<String> response2 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity2, String.class);
 
-        MessageDTO messageDTO = new MessageDTO("Ad was created with success.", null);
+        MessageDTO messageDTO = new MessageDTO(MessageEnum.V3000.getMessage(), MessageEnum.V3000.getId());
 
         // Compare JSON response
         assertEquals(HttpStatus.CREATED, response2.getStatusCode());
@@ -143,7 +144,8 @@ public class CreateAdCampaignViaPOSTTest {
         HttpEntity<Ad> httpEntity1 = new HttpEntity<>(ad);
         ResponseEntity<MessageDTO> response1 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity1, MessageDTO.class);
         assertEquals(HttpStatus.CREATED, response1.getStatusCode());
-        assertEquals("Ad was created with success.", response1.getBody().getMessage());
+        assertEquals(MessageEnum.V3000.getMessage(), response1.getBody().getMessage());
+        assertEquals(MessageEnum.V3000.getId(), response1.getBody().getId());
 
         // Wait for expiration
         Thread.sleep(1000);
@@ -151,7 +153,7 @@ public class CreateAdCampaignViaPOSTTest {
         // 2nd creation - It cannot be created because the active ad has expired - success
         ResponseEntity<String> response2 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity1, String.class);
 
-        MessageDTO messageDTO = new MessageDTO("Ad was created with success.", null);
+        MessageDTO messageDTO = new MessageDTO(MessageEnum.V3000.getMessage(), MessageEnum.V3000.getId());
 
         // Compare JSON response
         assertEquals(HttpStatus.CREATED, response2.getStatusCode());

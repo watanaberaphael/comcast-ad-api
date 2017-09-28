@@ -1,6 +1,7 @@
 package com.rnaka.comcast.ad.controller;
 
 import com.rnaka.comcast.ad.controller.dto.MessageDTO;
+import com.rnaka.comcast.ad.enumeration.MessageEnum;
 import com.rnaka.comcast.ad.model.Ad;
 import com.rnaka.comcast.ad.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class AdController {
     public ResponseEntity create(@RequestBody Ad ad) {
         adService.create(ad);
 
-        return new ResponseEntity(new MessageDTO("Ad was created with success."), HttpStatus.CREATED);
+        return new ResponseEntity(new MessageDTO(MessageEnum.V3000.getMessage(), MessageEnum.V3000.getId()), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{partner_id}", method = RequestMethod.GET)

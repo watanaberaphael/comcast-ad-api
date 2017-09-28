@@ -11,7 +11,9 @@ import java.io.Serializable;
 public enum MessageEnum implements Serializable {
 
     B1000("B1000", "There is already an active campaign for the partner"),
-    B1001("B1001", "No active campaigns for the partner");
+    B1001("B1001", "No active campaigns for the partner"),
+
+    V3000("V3000", "Ad was created with success.");
 
     private String id;
 

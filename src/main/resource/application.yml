@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ad-api
+  profiles:
+    active: @spring.profile@
+server:
+  context-path: /
+  display-name: ad-api
+  port: 8080

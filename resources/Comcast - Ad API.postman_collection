@@ -1,0 +1,109 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ComCast - Ad API",
+		"_postman_id": "933a20da-efa8-7a7c-73d0-d2e42330d2b5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ad - Add",
+			"request": {
+				"url": "http://localhost:8080/ad",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"partner_id\": \"unique_string_representing_partner\",\n \"duration\": \"3600\",\n \"ad_content\": \"string_of_content_to_display_as_ad\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Ad - List",
+			"request": {
+				"url": "http://localhost:8080/ad",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "partner_id",
+							"value": "12345",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "duration",
+							"value": "3600",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "ad_content",
+							"value": "Ad description content",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Ad - Get by Partner",
+			"request": {
+				"url": "http://localhost:8080/ad/123454",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "partner_id",
+							"value": "12345",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "duration",
+							"value": "3600",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "ad_content",
+							"value": "Ad description content",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

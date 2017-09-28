@@ -8,8 +8,9 @@ Index
  * [Requirements](#Requirements)
  * [Usage](#Usage)
  * [Installation](#Installation)
- * [Run Application](#Run Application)
- * [Integration Tests](#Integration Tests)
+ * [Run Application](#Installation)
+ * [Run Application](#RunApplication)
+ * [Integration Tests](#IntegrationTests)
  
 Requirements
 -------------
@@ -44,9 +45,10 @@ Run Application
    - Run mvn clean install
    - mvn package && java -jar target/ad-api-1.0.0.jar
     
-   The application runs on port 8080.
+    The application runs on port 8080.
    
-   
+Test Application
+----------------    
    To test the services, there are two ways:
    
    Automatic integration tests

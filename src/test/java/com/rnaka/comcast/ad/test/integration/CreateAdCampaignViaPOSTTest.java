@@ -74,6 +74,35 @@ public class CreateAdCampaignViaPOSTTest {
     }
 
     /**
+     * Verifies with multiple inserts of different partners
+     * @throws Exception
+     */
+    @Test
+    public void shouldInsert2nd() throws Exception {
+
+        Ad ad = MockUtils.getAdMock();
+
+        // 1st creation - It can be created - success
+        HttpEntity<Ad> httpEntity1 = new HttpEntity<>(ad);
+        ResponseEntity<MessageDTO> response1 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity1, MessageDTO.class);
+        assertEquals(HttpStatus.CREATED, response1.getStatusCode());
+        assertEquals("Ad was created with success.", response1.getBody().getMessage());
+
+
+        // 2nd creation - It can be created because that add is of other partner - success
+        ad = MockUtils.getAdMock();
+
+        HttpEntity<Ad> httpEntity2 = new HttpEntity<>(ad);
+        ResponseEntity<String> response2 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity2, String.class);
+
+        MessageDTO messageDTO = new MessageDTO("Ad was created with success.", null);
+
+        // Compare JSON response
+        assertEquals(HttpStatus.CREATED, response2.getStatusCode());
+        assertEquals(jsonTester.write(messageDTO).getJson(), response2.getBody());
+    }
+
+    /**
      * Verifies when it is already an active ad
      * @throws Exception
      */
@@ -100,5 +129,33 @@ public class CreateAdCampaignViaPOSTTest {
         assertEquals(jsonTester.write(messageDTO).getJson(), response2.getBody());
     }
 
+    /**
+     * Verifies with multiple inserts of different partners
+     * @throws Exception
+     */
+    @Test
+    public void shouldInsert2ndAfterActiveExpires() throws Exception {
+
+        Ad ad = MockUtils.getAdMock();
+        ad.setDuration(1);
+
+        // 1st creation - It can be created - success
+        HttpEntity<Ad> httpEntity1 = new HttpEntity<>(ad);
+        ResponseEntity<MessageDTO> response1 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity1, MessageDTO.class);
+        assertEquals(HttpStatus.CREATED, response1.getStatusCode());
+        assertEquals("Ad was created with success.", response1.getBody().getMessage());
+
+        // Wait for expiration
+        Thread.sleep(1000);
+
+        // 2nd creation - It cannot be created because the active ad has expired - success
+        ResponseEntity<String> response2 = restTemplate.exchange("http://localhost:" + port + "/ad", HttpMethod.POST, httpEntity1, String.class);
+
+        MessageDTO messageDTO = new MessageDTO("Ad was created with success.", null);
+
+        // Compare JSON response
+        assertEquals(HttpStatus.CREATED, response2.getStatusCode());
+        assertEquals(jsonTester.write(messageDTO).getJson(), response2.getBody());
+    }
 
 }
